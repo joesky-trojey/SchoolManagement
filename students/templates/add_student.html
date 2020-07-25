@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block blockcss %}
+<link rel="stylesheet" media="screen, print" href="{% static 'css/notifications/sweetalert2/sweetalert2.bundle.css' %}">
+{% endblock %}
+{% block pagecontent %}
+
+
+
+
+<main id="js-page-content" role="main" class="page-content">
+    <ol class="breadcrumb page-breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0);">Smart-View</a></li>
+        <li class="breadcrumb-item">Datatables</li>
+        <li class="breadcrumb-item active">Basic</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-table'></i> students: <span class='fw-300'></span> <sup class='badge badge-primary fw-500'>ADDON</sup>
+            <!-- <small>
+                Create headache free searching, sorting and pagination tables without any complex configuration
+            </small> -->
+        </h1>
+    </div>
+    <div class="panel-container show">
+        <div class="panel-content">
+            <div class="panel-tag">
+                Be sure to input all details properly
+     
+            </div>
+            {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </p>
+                {% endfor %}
+        
+        
+            <!-- {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %} -->
+        {% endif %}
+
+
+
+            <form id='add_stud_form' enctype="multipart/form-data" action="#" method="POST">
+           
+                {% csrf_token %}
+                {{form}}
+                <!-- {{form}}
+                <div class="form-group ">
+                    <label class="form-label" for="simpleinput">First Names</label>
+                    <input   type="text" placeholder="First name"  id="fname" required class="form-control" name='fname'>
+                </div>
+                <div class="form-group ">
+                    <label class="form-label" for="example-email-2">Second Name</label>
+                    <input type="text" id="sname" required name="sname" class="form-control " placeholder="second name">
+                </div>
+                <div class="form-group ">
+                    <label class="form-label" for="example-email-2">Surname</label>
+                    <input required type="text" id="surname" name="surname" class="form-control " placeholder="surname">
+                </div>
+                <div class="form-group ">
+                    <label class="form-label" for="example-email-2">Admission number</label>
+                    <input required type="number" id="adm_no" name="adm_no" class="form-control " placeholder="KCPE marks">
+                </div>
+
+                <div class="form-group ">
+                    <label class="form-label" for="example-email-2">KCPE marks</label>
+                    <input required type="number" id="kcpe" name="kcpe" class="form-control " placeholder="KCPE marks">
+                </div>
+           
+                <div class="form-group">
+                    <label class="form-label" for="example-select">Class entere</label>
+                    <select required  class="form-control" name='form' id="form">
+                        <option value="">Select</option>
+                        <option value="1">Form 1</option>
+                        <option value="2">Form 2</option>
+                        <option value="3">Form 3</option>
+                        <option value="4">Form 4</option>
+                       
+                    </select>
+                </div>
+             
+                <!- <div class="form-group">
+                    <label class="form-label">Select (custom)</label>
+                    <select class="custom-select form-control">
+                        <option selected="">Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>  --
+                <div class="form-group mb-0">
+                    <label class="form-label">Passport Image</label>
+                    <div class="custom-file">
+                        <input type="file" name="passport" class="custom-file-input" id="passport">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div> -->
+
+                <div class="form-group mb-0">
+                    <label class="form-label"></label>
+                    <div class="custom-file">
+                        <button class='btn btn-success' type="submit" id="sbt-btn"> Add Student</button>
+                       
+                    </div>
+                </div>
+
+               
+            </form>
+
+
+
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block blockjs %} 
+
+
+<script src="{% static 'js/notifications/sweetalert2/sweetalert2.bundle.js' %}"></script>
+<script type="text/javascript">
+        
+    var example_gridsize = $("#example-gridsize");
+    $('#sbt-btn').click((event)=>{
+        fname=$('#fname').val();
+        sname=$('#sname').val();
+        surname=$('#surname').val();
+        adm_no=$('#adm_no').val();
+        passport=$('#passport').val();
+        form=$('#form').val();
+        kcpe=$('#kcpe').val();
+        if(fname==''||sname==''||surname==''||adm_no==''||adm_no==''||form==''||kcpe==''){
+               var swalWithBootstrapButtons = Swal.mixin(
+            {
+                customClass:
+                {
+                    // confirmButton: "btn btn-primary",
+                    cancelButton: "btn btn-danger mr-2"
+                },
+                buttonsStyling: true
+            });
+            swalWithBootstrapButtons
+                .fire(
+                {
+                    title: "Missing Something?",
+                    text: "Please enter all the details!",
+                    type: "warning",
+                    showCancelButton: false,
+                    // confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "Okay!",
+                    reverseButtons: false
+                })
+            
+
+        }else {
+            
+        }
+
+
+
+     
+
+        // $('#add_stud_form').ajaxForm({
+        
+        // //    target:'data',
+        // data:{ add:1,},
+        // url:'add_students',
+        // beforeSubmit:()=>{
+        //   alert('logging you inn');
+        //     return true;
+        // },
+        // error:(err)=>{
+        //    alert('error while uploadind data'+err)
+
+        //     //alert('Encountered a problem whilelogging you in!')
+        // },
+        // complete:(data)=>{
+        //     data=JSON.parse(data.responseText);
+        //    if(data.info=='error'){
+        //    alert('error')
+        //    }else (
+        //        alert('success')
+        //    )
+        // }
+        // })
+
+      
+        
+            // var swalWithBootstrapButtons = Swal.mixin(
+            // {
+            //     customClass:
+            //     {
+            //         confirmButton: "btn btn-primary",
+            //         cancelButton: "btn btn-danger mr-2"
+            //     },
+            //     buttonsStyling: false
+            // });
+            // swalWithBootstrapButtons
+            //     .fire(
+            //     {
+            //         title: "Are you sure?",
+            //         text: "You won't be able to revert this!",
+            //         type: "warning",
+            //         showCancelButton: true,
+            //         confirmButtonText: "Yes, delete it!",
+            //         cancelButtonText: "No, cancel!",
+            //         reverseButtons: true
+            //     })
+            //     .then(function(result)
+            //     {
+            //         if (result.value)
+            //         {
+            //             swalWithBootstrapButtons.fire(
+            //                 "Deleted!",
+            //                 "Your file has been deleted.",
+            //                 "success"
+            //             );
+            //         }
+            //         else if (
+            //             // Read more about handling dismissals
+            //             result.dismiss === Swal.DismissReason.cancel
+            //         )
+            //         {
+            //             swalWithBootstrapButtons.fire(
+            //                 "Cancelled",
+            //                 "Your imaginary file is safe :)",
+            //                 "error"
+            //             );
+            //         }
+            //     });
+        
+    })
+
+    // $("#gridrange").on("input change", function()
+    // {
+    //     //do something
+    //     example_gridsize.attr("placeholder", ".col-" + $(this) z.val());
+    //     example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
+    //     console.log("col-" + $(this).val());
+    // });
+
+</script>
+{% endblock %}
+
+

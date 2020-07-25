@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block blockcss %}
+<link rel="stylesheet" media="screen, print" href="{% static 'css/notifications/sweetalert2/sweetalert2.bundle.css' %}">
+{% endblock %}
+{% block pagecontent %}
+
+
+
+
+<main id="js-page-content" role="main" class="page-content">
+    <ol class="breadcrumb page-breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0);">Smart-View</a></li>
+        <li class="breadcrumb-item">Datatables</li>
+        <li class="breadcrumb-item active">Basic</li>
+        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
+    </ol>
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-table'></i> <span class='fw-300'></span>
+            <!-- <sup class='badge badge-primary fw-500'>ADDON</sup>  -->
+            <!-- <small>
+                Create headache free searching, sorting and pagination tables without any complex configuration
+            </small> -->
+           
+
+        </h1>
+    </div>
+    <div class="panel-container show">
+        <div class="panel-content">
+            <div class="panel-tag">
+               {{info}} Admission number {{student.admission_number}} : {{student.fname}}  {{student.sname}}  {{student.surname}}
+
+            </div>
+        
+            <div class="card-body pb-0 px-4">
+                <div class="d-flex flex-row pb-3 pt-2  border-top-0 border-left-0 border-right-0">
+                    <div class="d-inline-block align-middle status status-success mr-3">
+                        <span class="profile-image rounded-circle d-block" style="background-image:url('/images/{{student.passport}}'); background-size: cover;"></span>
+                    </div>
+                    <h5 class="mb-0 flex-1 text-dark fw-500">
+                        {{student.fname | title}}  {{student.sname | title}}  {{student.surname | title}}
+                        <small class="m-0 l-h-n">
+                            {{student.Form}}
+                        </small>
+                    </h5>
+                    <span class="text-muted fs-xs opacity-70">
+                        2 days
+                    </span>
+                </div>
+                <div class="pb-3 pt-2 border-top-0 border-left-0 border-right-0 text-muted">
+                   
+                    <!-- URL post -->
+                    <div class="d-flex overflow-hidden rounded w-100 border">
+                        <div class="row no-gutters">
+                            
+                            <div class="container col-md-4"><img src="/images/{{student.passport}}" style="width:100%; mirgin-top:10%;"></div>
+                            <!-- <div class="col-2 col-sm-3" style="background-image:url(/images/{{student.passport}} ); background-size: cover;"></div> -->
+                            <div class="col-md-7">
+                             
+                                <div class="bg-faded flex-1 p-4 h-100">
+                                  
+                                    <p class="m-0">
+                                     
+                                           <table class="table m-o">
+                                    <tr class="bg-danger-500"><th>Admission Number</th><td>{{student.admission_number}}</td></tr>
+                                    <tr class="bg-info-500"><th>First Name</th><td>{{student.fname | title}}</td></tr>
+                                    <tr class="bg-primary-400"><th>Second Name</th><td>{{student.sname | title}}</td></tr>
+                                    <tr class="bg-success-100"><th>Surname </th><td>{{student.surname | title}}</td></tr>
+                                    <tr class="bg-warning-300"><th>Kcpe marks</th><td>{{student.kcpe}}</td></tr>
+                                    <tr class="bg-success-100"><th>Class</th><td>Form{{student.class_id | title}}</td></tr>
+                                    <tr class="bg-success-700"><th>Stream</th><td>Form{{student.stream | title}}</td></tr>
+                                  
+                                    
+                                </table>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+
+<!-- <div class='container'>
+<div class="col-md-7">
+<table class="table table-dark">
+    <tr><th>Admission Number</th><td>{{student.admission_number}}</td></tr>
+    <tr><th>First Name</th><td>{{student.fname}}</td></tr>
+    <tr><th>Second Name</th><td>{{student.sname}}</td></tr>
+    <tr><th>Surname </th><td>{{student.surname}}</td></tr>
+    <tr><th>Kcpe marks</th><td>{{student.kcpe}}</td></tr>
+    <tr><th>Class</th><td>Form{{student.class_id}}</td></tr>
+    <tr><th>Stream</th><td>Form{{student.stream}}</td></tr>
+    <tr><th>Passport/th><td>{{student.passport}}</td></tr>
+    
+</table>
+
+</div >
+<div class="col-md-5">
+    <img class="img-responsive" src='/images/{{student.passport}}' alt="image" >
+</div>
+
+</div> -->
+
+
+
+
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+{% block blockjs %} 
+
+<script src="{% static 'js/notifications/sweetalert2/sweetalert2.bundle.js' %}"></script>
+<script type="text/javascript">
+        
+    var example_gridsize = $("#example-gridsize");
+    $('#sbt-btn').click((event)=>{
+        fname=$('#fname').val();
+        sname=$('#sname').val();
+        surname=$('#surname').val();
+        adm_no=$('#adm_no').val();
+        passport=$('#passport').val();
+        form=$('#form').val();
+        kcpe=$('#kcpe').val();
+        if(fname==''||sname==''||surname==''||adm_no==''||adm_no==''||form==''||kcpe==''){
+               var swalWithBootstrapButtons = Swal.mixin(
+            {
+                customClass:
+                {
+                    // confirmButton: "btn btn-primary",
+                    cancelButton: "btn btn-danger mr-2"
+                },
+                buttonsStyling: true
+            });
+            swalWithBootstrapButtons
+                .fire(
+                {
+                    title: "Missing Something?",
+                    text: "Please enter all the details!",
+                    type: "warning",
+                    showCancelButton: false,
+                    // confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "Okay!",
+                    reverseButtons: false
+                })
+            
+
+        }else {
+            
+        }
+
+
+
+     
+
+        // $('#add_stud_form').ajaxForm({
+        
+        // //    target:'data',
+        // data:{ add:1,},
+        // url:'add_students',
+        // beforeSubmit:()=>{
+        //   alert('logging you inn');
+        //     return true;
+        // },
+        // error:(err)=>{
+        //    alert('error while uploadind data'+err)
+
+        //     //alert('Encountered a problem whilelogging you in!')
+        // },
+        // complete:(data)=>{
+        //     data=JSON.parse(data.responseText);
+        //    if(data.info=='error'){
+        //    alert('error')
+        //    }else (
+        //        alert('success')
+        //    )
+        // }
+        // })
+
+      
+        
+            // var swalWithBootstrapButtons = Swal.mixin(
+            // {
+            //     customClass:
+            //     {
+            //         confirmButton: "btn btn-primary",
+            //         cancelButton: "btn btn-danger mr-2"
+            //     },
+            //     buttonsStyling: false
+            // });
+            // swalWithBootstrapButtons
+            //     .fire(
+            //     {
+            //         title: "Are you sure?",
+            //         text: "You won't be able to revert this!",
+            //         type: "warning",
+            //         showCancelButton: true,
+            //         confirmButtonText: "Yes, delete it!",
+            //         cancelButtonText: "No, cancel!",
+            //         reverseButtons: true
+            //     })
+            //     .then(function(result)
+            //     {
+            //         if (result.value)
+            //         {
+            //             swalWithBootstrapButtons.fire(
+            //                 "Deleted!",
+            //                 "Your file has been deleted.",
+            //                 "success"
+            //             );
+            //         }
+            //         else if (
+            //             // Read more about handling dismissals
+            //             result.dismiss === Swal.DismissReason.cancel
+            //         )
+            //         {
+            //             swalWithBootstrapButtons.fire(
+            //                 "Cancelled",
+            //                 "Your imaginary file is safe :)",
+            //                 "error"
+            //             );
+            //         }
+            //     });
+        
+    })
+
+    // $("#gridrange").on("input change", function()
+    // {
+    //     //do something
+    //     example_gridsize.attr("placeholder", ".col-" + $(this) z.val());
+    //     example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
+    //     console.log("col-" + $(this).val());
+    // });
+
+</script>
+{% endblock %}
+
+
