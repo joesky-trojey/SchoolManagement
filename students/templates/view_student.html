@@ -10,12 +10,7 @@
 
 
 <main id="js-page-content" role="main" class="page-content">
-    <ol class="breadcrumb page-breadcrumb">
-        <li class="breadcrumb-item"><a href="javascript:void(0);">Smart-View</a></li>
-        <li class="breadcrumb-item">Datatables</li>
-        <li class="breadcrumb-item active">Basic</li>
-        <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
-    </ol>
+  
     <div class="subheader">
         <h1 class="subheader-title">
             <i class='subheader-icon fal fa-table'></i> <span class='fw-300'></span>
@@ -63,14 +58,14 @@
                                   
                                     <p class="m-0">
                                      
-                                           <table class="table m-o">
+                                           <table class="table m-o" style="width:100%">
                                     <tr class="bg-danger-500"><th>Admission Number</th><td>{{student.admission_number}}</td></tr>
                                     <tr class="bg-info-500"><th>First Name</th><td>{{student.fname | title}}</td></tr>
                                     <tr class="bg-primary-400"><th>Second Name</th><td>{{student.sname | title}}</td></tr>
                                     <tr class="bg-success-100"><th>Surname </th><td>{{student.surname | title}}</td></tr>
                                     <tr class="bg-warning-300"><th>Kcpe marks</th><td>{{student.kcpe}}</td></tr>
-                                    <tr class="bg-success-100"><th>Class</th><td>Form{{student.class_id | title}}</td></tr>
-                                    <tr class="bg-success-700"><th>Stream</th><td>Form{{student.stream | title}}</td></tr>
+                                    <tr class="bg-success-100"><th>Class</th><td>{{student.class_id.form_name | title}}</td></tr>
+                                    <tr class="bg-success-700"><th>Stream</th><td>{{student.stream_id.stream_name| title}}</td></tr>
                                   
                                     
                                 </table>
@@ -115,128 +110,10 @@
 {% block blockjs %} 
 
 <script src="{% static 'js/notifications/sweetalert2/sweetalert2.bundle.js' %}"></script>
-<script type="text/javascript">
-        
-    var example_gridsize = $("#example-gridsize");
-    $('#sbt-btn').click((event)=>{
-        fname=$('#fname').val();
-        sname=$('#sname').val();
-        surname=$('#surname').val();
-        adm_no=$('#adm_no').val();
-        passport=$('#passport').val();
-        form=$('#form').val();
-        kcpe=$('#kcpe').val();
-        if(fname==''||sname==''||surname==''||adm_no==''||adm_no==''||form==''||kcpe==''){
-               var swalWithBootstrapButtons = Swal.mixin(
-            {
-                customClass:
-                {
-                    // confirmButton: "btn btn-primary",
-                    cancelButton: "btn btn-danger mr-2"
-                },
-                buttonsStyling: true
-            });
-            swalWithBootstrapButtons
-                .fire(
-                {
-                    title: "Missing Something?",
-                    text: "Please enter all the details!",
-                    type: "warning",
-                    showCancelButton: false,
-                    // confirmButtonText: "Yes, delete it!",
-                    cancelButtonText: "Okay!",
-                    reverseButtons: false
-                })
-            
-
-        }else {
-            
-        }
 
 
 
      
-
-        // $('#add_stud_form').ajaxForm({
-        
-        // //    target:'data',
-        // data:{ add:1,},
-        // url:'add_students',
-        // beforeSubmit:()=>{
-        //   alert('logging you inn');
-        //     return true;
-        // },
-        // error:(err)=>{
-        //    alert('error while uploadind data'+err)
-
-        //     //alert('Encountered a problem whilelogging you in!')
-        // },
-        // complete:(data)=>{
-        //     data=JSON.parse(data.responseText);
-        //    if(data.info=='error'){
-        //    alert('error')
-        //    }else (
-        //        alert('success')
-        //    )
-        // }
-        // })
-
-      
-        
-            // var swalWithBootstrapButtons = Swal.mixin(
-            // {
-            //     customClass:
-            //     {
-            //         confirmButton: "btn btn-primary",
-            //         cancelButton: "btn btn-danger mr-2"
-            //     },
-            //     buttonsStyling: false
-            // });
-            // swalWithBootstrapButtons
-            //     .fire(
-            //     {
-            //         title: "Are you sure?",
-            //         text: "You won't be able to revert this!",
-            //         type: "warning",
-            //         showCancelButton: true,
-            //         confirmButtonText: "Yes, delete it!",
-            //         cancelButtonText: "No, cancel!",
-            //         reverseButtons: true
-            //     })
-            //     .then(function(result)
-            //     {
-            //         if (result.value)
-            //         {
-            //             swalWithBootstrapButtons.fire(
-            //                 "Deleted!",
-            //                 "Your file has been deleted.",
-            //                 "success"
-            //             );
-            //         }
-            //         else if (
-            //             // Read more about handling dismissals
-            //             result.dismiss === Swal.DismissReason.cancel
-            //         )
-            //         {
-            //             swalWithBootstrapButtons.fire(
-            //                 "Cancelled",
-            //                 "Your imaginary file is safe :)",
-            //                 "error"
-            //             );
-            //         }
-            //     });
-        
-    })
-
-    // $("#gridrange").on("input change", function()
-    // {
-    //     //do something
-    //     example_gridsize.attr("placeholder", ".col-" + $(this) z.val());
-    //     example_gridsize.parent().removeClass().addClass("col-" + $(this).val())
-    //     console.log("col-" + $(this).val());
-    // });
-
-</script>
 {% endblock %}
 
 

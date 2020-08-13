@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Forms(models.Model):
     form_id=models.IntegerField(primary_key=True)
-    form_name=models.TextField(max_length=10, verbose_name='Forn name')
+    form_name=models.TextField(max_length=10, verbose_name='Form name')
 
     """
     Model field 	Form field

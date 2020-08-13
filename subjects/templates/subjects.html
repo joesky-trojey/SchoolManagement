@@ -1,0 +1,177 @@
+
+                  {% extends 'base.html' %}
+                  {% block pagecontent %}
+                  
+                  <!-- BEGIN Page Content -->
+                    <!-- the #js-page-content id is needed for some plugins to initialize -->
+                    <main id="js-page-content" role="main" class="page-content">
+                        
+                        <div class="alert alert-primary">
+                            <div class="d-flex flex-start w-100">
+                                <div class="mr-2 hidden-md-down">
+                                    <span class="icon-stack icon-stack-lg">
+                                        <i class="base base-6 icon-stack-3x opacity-100 color-primary-500"></i>
+                                        <i class="base base-10 icon-stack-2x opacity-100 color-primary-300 fa-flip-vertical"></i>
+                                        <i class="ni ni-blog-read icon-stack-1x opacity-100 color-white"></i>
+                                    </span>
+                                </div>
+                                <div class="d-flex flex-fill">
+                                    <div class="flex-fill">
+                                        <span class="h5">Subjects:</span>
+                                        <p>
+                                        
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                           
+                            <div class="col-xl-12">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div id="panel-1" class="panel">
+                                            <div class="panel-hdr">
+                                                <h2>
+                                                    Subjects <span class="fw-300"><i>all</i></span>
+                                                </h2>
+                                                <div class="panel-toolbar">
+                                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                                                </div>
+                                            </div>
+                                            <div class="panel-container show">
+                                                <div class="panel-content">
+                                                    <div class="panel-tag">
+                                                        <table class='table table-responsive table-stripped'>
+                                                       <thead><th>Subject Name</th><th>Shorthand</th><th>Optionality</th><th>Action</th></thead>
+                                                       <tbody>
+
+                                                        {% for subject in subjects %}
+                                                        <tr><td>{{ subject.subject_name }}</td><td>{{subject.shorthand}}</td><td>{{subject.optionality}}</td> <td><a class="btn btn-primary">edit<i class="fa fa-edit"></i></a></td><td><a class="btn btn-danger ">delete<i class="fa fa-close"></i></a></td></tr>
+                                                        </tbody>
+                                                        {% endfor %}
+                                                        </table>
+
+                                                    </div>
+                                                    <div id="simpleLine" style="width:100%; height:300px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div id="panel-2" class="panel">
+                                            <div class="panel-hdr">
+                                                <h2>
+                                                    Add Subject <span class="fw-300"><i>Regions</i></span>
+                                                </h2>
+                                                <div class="panel-toolbar">
+                                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                                                </div>
+                                            </div>
+                                            <div class="panel-container show">
+                                                <div class="panel-content">
+                                                   
+                                                    <div id="linleRegions" style="width:100%; height:300px;">
+
+    
+
+
+
+
+                                                     
+            <form id='add_stud_form' enctype="multipart/form-data" action="#" method="POST">
+           
+                {% csrf_token %}
+
+                               <div class="form-group">
+                                                              
+                                                              
+                                                          {{form}}
+                                                               
+                                                            </div>
+                                    
+    
+            <button class="btn btn-dark" type="submit" >Add subject</button>
+                                                          
+                           </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div id="panel-3" class="panel">
+                                            <div class="panel-hdr">
+                                                <h2>
+                                                    Time <span class="fw-300"><i>Series</i></span>
+                                                </h2>
+                                                <div class="panel-toolbar">
+                                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                                                </div>
+                                            </div>
+                                            <div class="panel-container show">
+                                                <div class="panel-content">
+                                                    <div class="panel-tag">
+                                                        Simple line chart with timeseries data using <code>xFormat</code> and <code>axis</code> options
+                                                    </div>
+                                                    <div id="timeSeries" style="width:100%; height:300px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div id="panel-4" class="panel">
+                                            <div class="panel-hdr">
+                                                <h2>
+                                                    Spline <span class="fw-300"><i>Line</i></span>
+                                                </h2>
+                                                <div class="panel-toolbar">
+                                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                                                </div>
+                                            </div>
+                                            <div class="panel-container show">
+                                                <div class="panel-content">
+                                                    <div class="panel-tag">
+                                                        Display as Spline Chart
+                                                    </div>
+                                                    <div id="splilneLine" style="width:100%; height:300px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                        
+                    
+                    
+                        </div>
+                    </main>
+                    {% block blockjs %} 
+
+                    <script type='text/javascript'>
+
+                        $('input').addClass('form-control')
+                        $('label').addClass('form-label')
+                        $('select').addClass('form-control')
+
+                    </script>
+                    
+                    {% endblock %}
+                    
+{% endblock %}
+
+

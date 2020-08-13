@@ -26,4 +26,6 @@ urlpatterns = [
     # path(r'^$',index,name='index'),
     path('', index, name='index'),
     path('students/',include('students.urls')),
+    path('streams/',include('streams.urls')),
+    path('subjects/',include('subjects.urls'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

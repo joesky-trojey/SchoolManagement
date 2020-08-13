@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'students.apps.StudentsConfig',
-    'forms.apps.FormsConfig'
+    'forms.apps.FormsConfig',
+    'streams.apps.StreamsConfig',
+    'subjects.apps.SubjectsConfig'
    
 ]
 

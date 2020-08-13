@@ -6,6 +6,7 @@ from django import forms
 from forms.models import Forms as Form_name
 from django.forms import ModelChoiceField
 from django.contrib import messages
+from streams.models import Stream
 
 # from django.http import FileResponse
 # from fpdf import FPDF
@@ -21,6 +22,10 @@ class studentsForm(ModelForm):
     for e in Form_name.objects.all():
         lis=(int(e.form_id),str(e.form_name))
         classes.append(lis)
+    streams=[('','Select Stream')];
+    for stream in Stream.objects.all():
+        streams.append((stream.stream_id,stream.stream_name))
+        
         # print (e.form_name)
    
    
@@ -35,7 +40,7 @@ class studentsForm(ModelForm):
         'surname':forms.TextInput(attrs={'class':'form-control'}),
         'sname':forms.TextInput(attrs={'class':'form-control'}),
         'passport':forms.FileInput(attrs={'class':'form-control'}),
-        'stream_id':forms.TextInput(attrs={'class':'form-control'}),
+        'stream_id':forms.Select(choices='',attrs={'class':'form-control'}),
         'class_id':forms.Select(choices='',attrs={'class':'form-control'}),
         # 'class_id':forms.MultipleChoiceField(queryset=Form_name.objects.all(), to_field_name='None'),
         'kcpe':forms.NumberInput(attrs={'class':'form-control'}),
@@ -47,12 +52,16 @@ class studentsForm(ModelForm):
     def __init__(self,*args,**kwargs):
         super().__init__(*args, **kwargs)
         self.fields['class_id'].choices=self.classes
+        self.fields['stream_id'].choices=self.streams 
 
 
      
       
 def studentIndex(request):
-    return render(request, 'student_index.html',context={'info':'All students'})
+    students=Student.objects.all()
+   
+
+    return render(request, 'student_index.html',context={'info':'All students',"students":students})
    
 
         
@@ -85,7 +94,7 @@ def addStudent(request):
 
         print('reqested via post')
         info="New student"
-        return HttpResponseRedirect('view_student?adm_no='+str(adm_number))
+        return HttpResponseRedirect('../view_student?adm_no='+str(adm_number))
         #return render(request,'view_student.html',context={'info':info})
 
     # if request.method=='POST':
@@ -126,6 +135,21 @@ def view_student(request):
 
 def printPdf(request):
     return render(request,'print.html',context={})
+
+
+
+# @require_http_methods(["GET", "POST"])
+# def user_profile_list_view(request):
+#     """Directory of user profiles."""
+#     user_profession = request.GET.get('profession', None)
+#     if user_profession:
+#         users = User.objects.filter(profession=user_profession)
+#     else:
+#         users = User.objects.all()
+#     context = {'title': 'User Profile Directory',
+#                'users': users,
+#                'path': request.path}
+#     return render(request, 'function_views/users.html', context)
 
 
 

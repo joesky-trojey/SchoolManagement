@@ -1,5 +1,6 @@
 from django.db import models
 from forms.models import Forms
+from streams.models import Stream
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -12,7 +13,7 @@ class Student(models.Model):
     class_id=models.ForeignKey(Forms,verbose_name='Class', default=1,on_delete=models.CASCADE,)
     kcpe=models.PositiveIntegerField(verbose_name='Kcpe Marks',validators=[MinValueValidator(1),MaxValueValidator(500)])
     passport=models.FileField(max_length=200,upload_to='passports/',verbose_name='Passport Photo')
-    stream_id=models.IntegerField(verbose_name='Stream')
+    stream_id=models.ForeignKey(Stream,verbose_name='Stream',default='A',on_delete=models.CASCADE)
 
     
     
